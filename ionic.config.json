@@ -1,0 +1,12 @@
+{
+  "defaultProject": "smart-cup",
+  "projects": {
+    "smart-cup": {
+      "name": "smart-cup",
+      "integrations": {},
+      "type": "angular"
+    }
+  }
+}
+
+
