@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: 0;
+  margin: 0;
+
+  --primary-color: #bf0d0d;
+  --background-primary: #bf0d0d;
+}
+
+.h-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.v-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center-start {
+  justify-content: flex-start;
+}
+
+.flex-center-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.full {
+  height: 100%;
+  Width: 100%;
+}
+
+
