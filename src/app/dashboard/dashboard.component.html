@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<div class="v-box flex-center-center full" style="background-color: var(--background-primary)">
+  <div class="span-2 v-box flex-center-center">
+    <ion-label>Your Cup</ion-label>
+    <div class="h-box temp-display">
+      <h4 style="margin-left: 25px;">{{shownValue$ | async}}<span>&#8451;</span></h4>
+    </div>
+  </div>
+  <div class="span-1">
+    <p>Some other content here...</p>
+  </div>
+</div>
+

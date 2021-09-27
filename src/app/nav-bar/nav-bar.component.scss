@@ -1,0 +1,32 @@
+:host {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.nav-bar {
+  background-color: var(--nav-backgorund);
+  width: 100%;
+  .nav-button{
+    padding: 15px 20px;
+    background-color: var(--nav-backgorund);
+    fa-icon {
+      color: var(--text-color);
+      font-size: 1.5em;
+    }
+    border-right: var(--nav-button-border);
+  }
+
+  .nav-button-pressed {
+    background-color: var(--primary-color) !important;
+  }
+}
+
+* {
+  --nav-backgorund: #D62404;
+  --nav-button: #D62404;
+  --nav-button-pressed: #b92304;
+  --nav-button-border: 1px solid #ED4B07AA;
+}
+
+

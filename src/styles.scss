@@ -11,6 +11,16 @@ body, html {
 
   --primary-color: #bf0d0d;
   --background-primary: #bf0d0d;
+  --text-color: #ffffff;
+  --theme-color-1: #D9D7D7;
+  --theme-color-2: #A6652D;
+  --theme-color-3: #A65A2E;
+  --theme-color-4: #593F2F;
+  --theme-color-5: #260101;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, ion-label {
+  color: var(--text-color);
 }
 
 .h-box {
@@ -37,4 +47,17 @@ body, html {
   Width: 100%;
 }
 
+.span-1 {
+  flex: 1;
+}
 
+.span-2 {
+  flex: 2;
+}
+
+.span-3 {
+  flex: 3;
+}
+.span-4 {
+  flex: 4;
+}

@@ -9,6 +9,8 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {TempGraphComponent} from "./temp-graph/temp-graph.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     DashboardComponent,
     SettingsComponent,
-    TempGraphComponent
+    TempGraphComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       }
     ),
     FontAwesomeModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
