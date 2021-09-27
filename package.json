@@ -28,6 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@ionic/angular": "^5.8.0",
     "@ionic/pwa-elements": "^3.0.2",
+    "chart.js": "^3.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
