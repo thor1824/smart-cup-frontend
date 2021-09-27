@@ -1,2 +1,14 @@
-<div class="v-box flex-center-center full" style="background-color: var(--background-primary)">
-  <p>temp-graph works!</p></div>
+<ion-content>
+  <ion-list-header color="light">Vertical Bar Chart</ion-list-header>
+  <ion-card class="card">
+    <ion-card-header>
+      <ion-card-subtitle>Number of Viewers per season for</ion-card-subtitle>
+      <ion-card-title>Game of Thrones</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #chart id="chart"></canvas>
+    </ion-card-content>
+    <button (click)="click()">Hello</button>
+  </ion-card>
+
+</ion-content>
