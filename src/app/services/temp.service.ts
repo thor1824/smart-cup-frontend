@@ -30,25 +30,33 @@ export class TempService {
 
 
   getThisMonthTemp(): Observable<TempReading[]> {
-    const start = new Date();
-    const end = new Date(start.valueOf() + 2592000000); // +30 days
+    const end = new Date();
+    const start = new Date(end.valueOf() - 2592000000); // -30 days
     this.http.get<TempReading[]>(`${this.tempApi}/${this.deviceService.DeviceId}`, {
       params: {
         from: '' + start,
         to: '' + end
       }
     }).subscribe(response => {
+      console.log(response)
+
+      if(!response || response.length <= 0) {
+        return;
+      }
+
       for (const tempReading of response) {
         tempReading.timestamp = new Date(tempReading.timestamp);
       }
-      this.tempOfPeriod.next(response.sort((a, b) => a.timestamp.valueOf() - b.timestamp.valueOf()));
+      const sorted = response.sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf())
+      this.tempOfPeriod.next(sorted);
+      this.newestTemp.next(sorted[0]);
     })
     this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).subscribe((tempReading) => {
       tempReading.timestamp = new Date(tempReading.timestamp);
       const readings = this.tempOfPeriod.value;
       readings.push(tempReading);
       this.newestTemp.next(tempReading);
-      this.tempOfPeriod.next(readings.sort((a, b) => a.timestamp.valueOf() - b.timestamp.valueOf()));
+      this.tempOfPeriod.next(readings.sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf()));
     });
     return this.tempOfPeriod$;
   }
