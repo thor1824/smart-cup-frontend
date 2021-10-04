@@ -14,8 +14,9 @@ export class TempService {
   tempOfPeriod = new BehaviorSubject<TempReading[]>([]);
   newestTemp = new ReplaySubject<TempReading>(1);
   tempOfPeriod$ = this.tempOfPeriod.asObservable();
+  tempOfPeriodSetup = false;
   newestTemp$ = this.newestTemp.asObservable();
-
+  newestTempSetup = false;
   constructor(
     private http: HttpClient,
     private deviceService: DeviceService,
@@ -24,12 +25,21 @@ export class TempService {
 
 
   getNewestTemp(): Observable<TempReading> {
-
+    if(this.newestTempSetup) {
+      return this.newestTemp$
+    }
+    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).subscribe((tempReading) => {
+      this.newestTemp.next(tempReading);
+    });
+    this.newestTempSetup = true;
     return this.newestTemp$;
   }
 
 
   getThisMonthTemp(): Observable<TempReading[]> {
+    if(this.tempOfPeriodSetup) {
+      return this.tempOfPeriod$
+    }
     const end = new Date();
     const start = new Date(end.valueOf() - 2592000000); // -30 days
     this.http.get<TempReading[]>(`${this.tempApi}/${this.deviceService.DeviceId}`, {
@@ -48,16 +58,16 @@ export class TempService {
         tempReading.timestamp = new Date(tempReading.timestamp);
       }
       const sorted = response.sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf())
-      this.tempOfPeriod.next(sorted);
+      this.tempOfPeriod.next(sorted.slice(0, 10));
       this.newestTemp.next(sorted[0]);
     })
     this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).subscribe((tempReading) => {
       tempReading.timestamp = new Date(tempReading.timestamp);
       const readings = this.tempOfPeriod.value;
       readings.push(tempReading);
-      this.newestTemp.next(tempReading);
       this.tempOfPeriod.next(readings.sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf()));
     });
+    this.tempOfPeriodSetup = true;
     return this.tempOfPeriod$;
   }
 }

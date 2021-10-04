@@ -1,42 +1,50 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
-  Chart,
-  BarElement,
+  ArcElement,
   BarController,
+  BarElement,
   CategoryScale,
+  Chart,
   Decimation,
   Filler,
   Legend,
-  Title,
-  Tooltip,
   LinearScale,
   LineController,
-  PointElement,
   LineElement,
+  PointElement,
   PolarAreaController,
+  RadarController,
   RadialLinearScale,
-  ArcElement,
-  RadarController
+  Title,
+  Tooltip
 } from "chart.js";
-import {async, Subject} from "rxjs";
-declare var $:  any;
+import {TempService} from "../services/temp.service";
+import {takeWhile} from "rxjs/operators";
+
+declare var $: any;
 
 @Component({
   selector: 'app-temp-graph',
   templateUrl: './temp-graph.component.html',
   styleUrls: ['./temp-graph.component.scss']
 })
-export class TempGraphComponent implements OnInit, AfterViewInit {
+export class TempGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('chart') chart: any;
-
-  asyncData: Subject<any> = new Subject<any>();
-  asyncData$ = this.asyncData.asObservable();
-
+  /*
+    asyncData: Subject<TempReading[]> = new Subject<TempReading>();
+    asyncData$ = this.asyncData.asObservable();
+  */
   bars!: any;
   colorArray: any;
-  constructor() { }
+  private loaded: boolean = false;
+
+  constructor(
+    private tempService: TempService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.loaded = false;
   }
 
   ngAfterViewInit(): void {
@@ -48,52 +56,76 @@ export class TempGraphComponent implements OnInit, AfterViewInit {
 
   }
 
-  ionViewWillLeave(){
-    this.bars.destroy()
+  ionViewWillLeave() {
+
   }
 
 
   private createBarChart() {
     Chart.register(BarElement, BarController, CategoryScale, RadarController, LineController, PolarAreaController, RadialLinearScale, ArcElement, Decimation, Filler, Legend, Title, Tooltip, LinearScale, LineElement, LineController, PointElement);
 
-      this.bars = new Chart(this.chart.nativeElement, {
-        type: 'line',
-        data: {
-          labels: ['Red','Blue', 'Green'],
-          datasets: [{
-            label: 'Temperature in Celsius',
-            backgroundColor: '#1eee00', // array should have same number of elements as number of dataset
-            borderColor: '#1eee00',// array should have same number of elements as number of dataset
-            data: [1,0.70,0.25],
-            fill: 'origin',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            }
+    this.bars = new Chart(this.chart.nativeElement, {
+      type: 'line',
+      data: {
+        /*labels: [],*/
+        datasets: [{
+          label: 'Temperature in Celsius',
+          backgroundColor: '#1eee00', // array should have same number of elements as number of dataset
+          borderColor: '#1eee00',// array should have same number of elements as number of dataset
+          data: [],
+          borderWidth: 1,
+          pointRadius: 0,
+        }]
+
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: false,
           }
         }
-      });
-
-  }
-
-  click(){
-    this.asyncData.next({
-      date: new Date().toDateString(),
-      temp: Math.random()
+      }
     });
+
   }
 
-  addDataToChart(data: any,label: string){
+  click() {
+  }
+
+  addDataToChart(data: any, label: string) {
+    const maxShown = 10;
+    if (this.bars.config._config.data.datasets[0].data.length >= maxShown) {
+      this.bars.config._config.data.labels.splice(maxShown - 1, 1);
+      this.bars.config._config.data.datasets[0].data.splice(maxShown - 1, 1);
+    }
     this.bars.config._config.data.labels.push(label);
     this.bars.config._config.data.datasets[0].data.push(data);
     this.bars.update();
   }
 
-  gettingAsyncConnection(){
-    this.asyncData$.subscribe(resp => this.addDataToChart(resp.temp, resp.date));
+  gettingAsyncConnection() {
+    this.tempService.getThisMonthTemp().pipe(takeWhile(() => !this.loaded)).subscribe(resp => {
+      if (!resp || resp.length <= 0) {
+        return;
+      }
+      console.log(resp)
+      this.loaded = true;
+      for (const tempReading of resp.reverse()) {
+
+        console.log(tempReading);
+        this.addDataToChart(tempReading.value, tempReading.timestamp.toDateString())
+      }
+    });
+
+    this.tempService.getNewestTemp().subscribe(value => {
+      if (!this.loaded) {
+        return;
+      }
+      this.addDataToChart(value.value, value.timestamp.toDateString())
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.bars.destroy()
   }
 }
