@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {TempReading, TempService} from "../services/temp.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,14 +15,18 @@ export class DashboardComponent implements OnInit {
   private currentTask = 0;
 
 
-  constructor() {
+  constructor(
+    private tempService: TempService
+  ) {
   }
 
   ngOnInit(): void {
+    this.tempService.getNewestTemp().subscribe(x => this.handleNewTemp(x))
+    this.tempService.getThisMonthTemp().subscribe()
   }
 
-  public onSetTemp() {
-    const newValue = parseFloat(this.value);
+  public handleNewTemp(reading: TempReading) {
+    const newValue = reading.value;
     const oldValue = this.temperatur;
     this.temperatur = newValue;
     this.animateTempUp(newValue, oldValue).then();

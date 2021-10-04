@@ -5,13 +5,33 @@ import {LoginComponent} from "./login/login.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {TempGraphComponent} from "./temp-graph/temp-graph.component";
+import {DeviceGuard} from "./guard/deviceGuard";
 
 const routes: Routes = [
-  { path: 'temp-graph', component: TempGraphComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: 'temp-graph',
+    component: TempGraphComponent,
+    canActivate: [DeviceGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [DeviceGuard]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [DeviceGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

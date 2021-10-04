@@ -23,6 +23,10 @@ h1, h2, h3, h4, h5, h6, p, span, ion-label {
   color: var(--text-color);
 }
 
+ion-content {
+  background-color: var(--background-primary)
+}
+
 .h-box {
   display: flex;
   flex-direction: row;

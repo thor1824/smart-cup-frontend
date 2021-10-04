@@ -5,12 +5,12 @@
       C</p>up
     </ion-label>
   </div>
-  <div style="position: absolute; bottom: 150px" class="v-box flex-center-start">
+  <form [formGroup]="formGroup" style="position: absolute; bottom: 150px" class="v-box flex-center-start">
     <ion-label style="text-align: center; width: 100%; margin-bottom: 10px; color: white; font-weight: 600">Device ID
     </ion-label>
     <ion-input
       style="border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
-      placeholder="Enter device id"></ion-input>
-    <ion-button style="margin-top: 20px">Connect</ion-button>
-  </div>
+      placeholder="Enter device id" [formControl]="deviceIDCon"></ion-input>
+    <ion-button style="margin-top: 20px" (click)="onCommitId()" [disabled]="this.formGroup.invalid">Connect</ion-button>
+  </form>
 </div>
