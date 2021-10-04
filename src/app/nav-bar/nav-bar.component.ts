@@ -21,8 +21,8 @@ export class NavBarComponent implements OnInit {
 
   navigateTo(index: NavTo) {
     this.indexPressed = index;
-    const navString = this.getNavString(index)
-    this.router.navigate([navString]).then();
+    const navString = this.getNavString(index);
+    this.router.navigate([navString]);
   }
 
   private getNavString(index: NavTo) {

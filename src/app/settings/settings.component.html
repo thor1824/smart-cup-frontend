@@ -1,3 +1,16 @@
-<div class="v-box flex-center-center full" style="background-color: var(--background-primary)">
-  <p>settings works!</p>
+<div style="background-color: var(--background-primary)">
+<h1 class="flex-center-center v-box">Settings</h1>
+
+  <ion-list>
+    <div align="center">
+      <ion-title> Current Interval: </ion-title>
+      <ion-title [textContent]="intervalString"> </ion-title>
+      <ion-item style="width: 75%;" >
+        <ion-text slot="start">0.5</ion-text>
+        <ion-text slot="end"> 10</ion-text>
+        <ion-range pin="true " max="10" step="0.5" snaps="true" debounce="1000" [(ngModel)]="interval" style="padding: 10px" (ionChange)="OnIonChange()"></ion-range>
+      </ion-item>
+    </div>
+
+  </ion-list>
 </div>
