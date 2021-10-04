@@ -9,6 +9,7 @@ export class IconService {
   public Coffee = iconLibrarySolidFree.faMugHot
   public Chart = iconLibraryRegularFree.faChartBar
   public Clock = iconLibraryRegularFree.faClock
+  public Settings = iconLibrarySolidFree.faCog
 
   constructor() { }
 }

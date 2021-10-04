@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {
   Chart,
   BarElement,
@@ -26,7 +26,7 @@ declare var $:  any;
   templateUrl: './temp-graph.component.html',
   styleUrls: ['./temp-graph.component.scss']
 })
-export class TempGraphComponent implements OnInit {
+export class TempGraphComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') chart: any;
 
   asyncData: Subject<any> = new Subject<any>();
@@ -39,9 +39,13 @@ export class TempGraphComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ionViewWillEnter() {
+  ngAfterViewInit(): void {
     this.createBarChart();
     this.gettingAsyncConnection();
+  }
+
+  ionViewWillEnter() {
+
   }
 
   ionViewWillLeave(){
