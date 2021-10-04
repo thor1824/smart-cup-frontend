@@ -37,38 +37,43 @@ export class TempGraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
   }
 
   ionViewWillEnter() {
-    this.createBarChart()
+    this.createBarChart();
     this.gettingAsyncConnection();
+  }
+
+  ionViewWillLeave(){
+    this.bars.destroy()
   }
 
 
   private createBarChart() {
     Chart.register(BarElement, BarController, CategoryScale, RadarController, LineController, PolarAreaController, RadialLinearScale, ArcElement, Decimation, Filler, Legend, Title, Tooltip, LinearScale, LineElement, LineController, PointElement);
-    this.bars = new Chart(this.chart.nativeElement, {
-      type: 'line',
-      data: {
-        labels: ['Red','Blue', 'Green'],
-        datasets: [{
-          label: 'Temperature in Celsius',
-          backgroundColor: '#ddee44', // array should have same number of elements as number of dataset
-          borderColor: '#ddee44',// array should have same number of elements as number of dataset
-          data: [1,0.70,0.25],
-          fill: 'origin',
-         borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
+
+      this.bars = new Chart(this.chart.nativeElement, {
+        type: 'line',
+        data: {
+          labels: ['Red','Blue', 'Green'],
+          datasets: [{
+            label: 'Temperature in Celsius',
+            backgroundColor: '#1eee00', // array should have same number of elements as number of dataset
+            borderColor: '#1eee00',// array should have same number of elements as number of dataset
+            data: [1,0.70,0.25],
+            fill: 'origin',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            }
           }
         }
-      }
-    });
+      });
+
   }
 
   click(){
@@ -79,7 +84,6 @@ export class TempGraphComponent implements OnInit {
   }
 
   addDataToChart(data: any,label: string){
-
     this.bars.config._config.data.labels.push(label);
     this.bars.config._config.data.datasets[0].data.push(data);
     this.bars.update();
