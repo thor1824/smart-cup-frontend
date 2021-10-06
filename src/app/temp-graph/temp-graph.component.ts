@@ -108,11 +108,9 @@ export class TempGraphComponent implements OnInit, OnDestroy, AfterViewInit {
       if (!resp || resp.length <= 0) {
         return;
       }
-      console.log(resp)
       this.loaded = true;
       for (const tempReading of resp.reverse()) {
 
-        console.log(tempReading);
         this.addDataToChart(tempReading.value, tempReading.timestamp.toDateString())
       }
     });

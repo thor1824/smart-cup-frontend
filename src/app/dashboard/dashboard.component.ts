@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
   }
 
   public handleNewTemp(reading: TempReading) {
-    console.log(reading);
     const newValue = reading.value;
     const oldValue = this.temperatur;
     this.temperatur = newValue;
@@ -35,7 +34,6 @@ export class DashboardComponent implements OnInit {
   }
 
   public async animateTempUp(newValue: number, oldValue: number) {
-    console.log({newValue, oldValue})
     this.currentTask++;
     const thisTask = this.currentTask
     const s = parseFloat(this.shownValueBehavior.value)
@@ -45,7 +43,6 @@ export class DashboardComponent implements OnInit {
         this.shownValueBehavior.next(i.toFixed(1));
         await delay(10);
         if (thisTask !== this.currentTask) {
-          console.log("escape");
           return;
         }
       }
@@ -57,7 +54,6 @@ export class DashboardComponent implements OnInit {
       this.shownValueBehavior.next(i.toFixed(1));
       await delay(10);
       if (thisTask !== this.currentTask) {
-        console.log("escape");
         return;
       }
     }

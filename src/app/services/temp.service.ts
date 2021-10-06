@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, ReplaySubject} from "rxjs";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {DeviceService} from "./device.service";
-import { Socket } from 'ngx-socket-io';
+import {Socket} from 'ngx-socket-io';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +18,26 @@ export class TempService {
   tempOfPeriodSetup = false;
   newestTemp$ = this.newestTemp.asObservable();
   newestTempSetup = false;
+
   constructor(
     private http: HttpClient,
     private deviceService: DeviceService,
     private socket: Socket
-  ) { }
+  ) {
+  }
 
 
   getNewestTemp(): Observable<TempReading> {
-    if(this.newestTempSetup) {
+    if (this.newestTempSetup) {
       return this.newestTemp$
     }
-    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).subscribe((tempReading) => {
+    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).pipe(map(x => {
+      return {
+        ...x,
+        timestamp: new Date(x.timestamp)
+      }
+
+    })).subscribe((tempReading) => {
       this.newestTemp.next(tempReading);
     });
     this.newestTempSetup = true;
@@ -37,7 +46,7 @@ export class TempService {
 
 
   getThisMonthTemp(): Observable<TempReading[]> {
-    if(this.tempOfPeriodSetup) {
+    if (this.tempOfPeriodSetup) {
       return this.tempOfPeriod$
     }
     const end = new Date();
@@ -47,10 +56,16 @@ export class TempService {
         from: '' + start,
         to: '' + end
       }
-    }).subscribe(response => {
-      console.log(response)
+    }).pipe(map(x => {
+      return x.map(x => {
+        return {
+          ...x,
+          timestamp: new Date(x.timestamp)
+        }
+      })
+    })).subscribe(response => {
 
-      if(!response || response.length <= 0) {
+      if (!response || response.length <= 0) {
         return;
       }
 
@@ -61,7 +76,13 @@ export class TempService {
       this.tempOfPeriod.next(sorted.slice(0, 10));
       this.newestTemp.next(sorted[0]);
     })
-    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).subscribe((tempReading) => {
+    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).pipe(map(x => {
+      return {
+        ...x,
+        timestamp: new Date(x.timestamp)
+      }
+
+    })).subscribe((tempReading) => {
       tempReading.timestamp = new Date(tempReading.timestamp);
       const readings = this.tempOfPeriod.value;
       readings.push(tempReading);

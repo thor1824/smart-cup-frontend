@@ -14,8 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DeviceGuard} from "./guard/deviceGuard";
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {environment} from "../environments/environment";
-import {HttpClientModule} from "@angular/common/http";
-
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 const config: SocketIoConfig = {url: environment.socketUrl, options: {}};
 
 @NgModule({
@@ -30,6 +29,7 @@ const config: SocketIoConfig = {url: environment.socketUrl, options: {}};
   imports: [
     BrowserModule,
     RouterModule,
+    HttpClientModule ,
     AppRoutingModule,
     IonicModule.forRoot(
       {
