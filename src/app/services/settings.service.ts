@@ -8,7 +8,7 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class SettingsService {
-  api = environment + 'settings'
+  api = environment + '/settings'
   constructor(private client: HttpClient) { }
 
 
