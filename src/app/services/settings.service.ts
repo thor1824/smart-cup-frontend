@@ -2,22 +2,23 @@ import { Injectable } from '@angular/core';
 import {Settings, SettingsPutBody} from "../settings/models/SettingsPutBody";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
-
+  api = environment + 'settings'
   constructor(private client: HttpClient) { }
 
 
 
   public UpdateSettings(setting: SettingsPutBody) {
-    return this.client.put('http://localhost:3000/settings', setting);
+    return this.client.put(this.api, setting);
   }
 
   public GetSettings(id: string) : Observable<Settings> {
-    return this.client.get<Settings>('http://localhost:3000/settings/' + id);
+    return this.client.get<Settings>(`${this.api}/${id}`);
   }
 
 }
