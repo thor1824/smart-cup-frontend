@@ -1,11 +1,8 @@
-import {Component, OnInit, Pipe} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
 import {SettingsPutBody} from "./models/SettingsPutBody";
-import {Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
-import {valueOrDefault} from "chart.js/helpers";
 import {SettingsService} from "../services/settings.service";
 import {DeviceService} from "../services/device.service";
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -14,6 +11,7 @@ import {DeviceService} from "../services/device.service";
 export class SettingsComponent implements OnInit {
   public interval = 5;
   public intervalString = '';
+  private sensorId: string = "";
 
   constructor(private settingsService: SettingsService, private deviceService: DeviceService) {
   }
@@ -28,20 +26,24 @@ export class SettingsComponent implements OnInit {
 
   private SetIntervalAtStart() {
     this.settingsService.GetSettings(this.deviceService.DeviceId).subscribe(value => {
+      this.sensorId = value.configs[0].sensorId;
       this.interval = (value.configs[0].interval / 1000);
       this.intervalString = this.interval + ' seconds';
     });
   }
 
   private SetCurrentInterval(interval: number) {
-    if(interval === 0) {
+    if (interval === 0) {
       return;
     }
     this.intervalString = interval + ' seconds';
 
     const setting = <SettingsPutBody>({
-      interval: interval * 1000,
-      iotDeviceId: this.deviceService.DeviceId
+      iotDeviceId: this.deviceService.DeviceId,
+      sensorConfigs: [{
+        sensorId: this.sensorId,
+        interval: interval * 1000,
+      }]
     });
     this.settingsService.UpdateSettings(setting).subscribe();
   }

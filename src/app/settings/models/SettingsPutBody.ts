@@ -1,7 +1,6 @@
 export interface SettingsPutBody {
-  interval: number;
+  sensorConfigs: SensorConfig[]
   iotDeviceId: string;
-  sensorId: string
 }
 
 export interface Settings {
