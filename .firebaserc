@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "smart-cup-cb789"
+  },
+  "targets": {
+    "smart-cup-cb789": {
+      "hosting": {
+        "smart-cup": [
+          "smart-cup-cb789"
+        ]
+      }
+    }
+  }
+}

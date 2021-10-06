@@ -21,6 +21,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public OnIonChange(event: any) {
+    console.log(event);
     this.SetCurrentInterval(event.detail.value);
   }
 
@@ -46,6 +47,7 @@ export class SettingsComponent implements OnInit {
         Interval: interval * 1000,
       }]
     });
+    console.log(interval);
     this.settingsService.UpdateSettings(setting).subscribe();
   }
 
