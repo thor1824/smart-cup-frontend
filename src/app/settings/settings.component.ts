@@ -20,20 +20,21 @@ export class SettingsComponent implements OnInit {
     this.SetIntervalAtStart();
   }
 
-  public OnIonChange() {
-    this.SetCurrentInterval(this.interval);
+  public OnIonChange(event: any) {
+    this.SetCurrentInterval(event.detail.value);
   }
 
   private SetIntervalAtStart() {
     this.settingsService.GetSettings(this.deviceService.DeviceId).subscribe(value => {
-      this.sensorId = value.configs[0].sensorId;
-      this.interval = (value.configs[0].interval / 1000);
+      console.log(value)
+      this.sensorId = value.configs[0].SensorId;
+      this.interval = (value.configs[0].Interval / 1000);
       this.intervalString = this.interval + ' seconds';
     });
   }
 
   private SetCurrentInterval(interval: number) {
-    if (interval === 0) {
+    if (interval === 0 || !this.sensorId) {
       return;
     }
     this.intervalString = interval + ' seconds';
@@ -41,8 +42,8 @@ export class SettingsComponent implements OnInit {
     const setting = <SettingsPutBody>({
       iotDeviceId: this.deviceService.DeviceId,
       sensorConfigs: [{
-        sensorId: this.sensorId,
-        interval: interval * 1000,
+        SensorId: this.sensorId,
+        Interval: interval * 1000,
       }]
     });
     this.settingsService.UpdateSettings(setting).subscribe();

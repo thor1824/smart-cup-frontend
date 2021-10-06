@@ -8,8 +8,8 @@
       <ion-item style="width: 75%;background-color: transparent" color="transparent" lines="none">
         <ion-text slot="start">0.5</ion-text>
         <ion-text slot="end"> 10</ion-text>
-        <ion-range min="0.5" max="10" step="0.5" snaps="true" debounce="1000" [(ngModel)]="interval"
-                   style="padding: 10px" (ionChange)="OnIonChange()"></ion-range>
+        <ion-range min="0.5" max="10" step="0.5" snaps="true" debounce="1000" value="{{interval}}"
+                   style="padding: 10px" (ionChange)="OnIonChange($event)"></ion-range>
       </ion-item>
     </div>
 

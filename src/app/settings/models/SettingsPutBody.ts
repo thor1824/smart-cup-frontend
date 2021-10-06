@@ -9,6 +9,6 @@ export interface Settings {
 }
 
 export interface SensorConfig {
-  sensorId: string
-  interval: number
+  SensorId: string
+  Interval: number
 }
