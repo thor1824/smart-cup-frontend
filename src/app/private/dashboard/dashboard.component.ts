@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {TempReading, TempService} from "../services/temp.service";
+import {TempReading, TempService} from "../../services/temp.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,16 +14,25 @@ export class DashboardComponent implements OnInit {
   public shownValueBehavior = new BehaviorSubject<string>("" + this.temperatur);
   public shownValue$ = this.shownValueBehavior.asObservable();
   private currentTask = 0;
+  public noDevice = false;
 
 
   constructor(
-    private tempService: TempService
+    private tempService: TempService,
+    private auth: AuthService
   ) {
   }
 
   ngOnInit(): void {
-    this.tempService.getNewestTemp().subscribe(x => this.handleNewTemp(x))
-    this.tempService.getThisMonthTemp().subscribe()
+    const sub = this.auth.user$.subscribe(x => {
+      if (!!x.devices && x.devices.length > 0) {
+        const dId = x.devices[0];
+        this.tempService.getNewestTemp(dId).subscribe(x => this.handleNewTemp(x))
+        this.tempService.getThisMonthTemp(dId).subscribe()
+      } else {
+        this.noDevice = true;
+      }
+    });
   }
 
   public handleNewTemp(reading: TempReading) {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SettingsPutBody} from "./models/SettingsPutBody";
-import {SettingsService} from "../services/settings.service";
-import {DeviceService} from "../services/device.service";
+import {SettingsService} from "../../services/settings.service";
+import {DeviceService} from "../../services/device.service";
 
 @Component({
   selector: 'app-settings',

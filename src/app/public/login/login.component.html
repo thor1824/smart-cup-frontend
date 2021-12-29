@@ -1,0 +1,60 @@
+<div class="v-box flex-center-center full" style="background-color: var(--background-primary)">
+  <div class="v-box flex-center-center" style="position: absolute; margin-bottom: 150px">
+    <fa-icon [icon]="iconService.Coffee" style="color: white; font-size: 4em"></fa-icon>
+    <ion-label style="color: white; font-size: 2em; font-weight: 100;" class="h-box"><p class="s">S</p>mart<p class="s">
+      C</p>up
+    </ion-label>
+  </div>
+  <div class="tp-wrapper">
+    <div class="tp-box" [@flipState]="flip">
+      <div class="tp-box__side tp-box__front">
+        <div>
+          <form [formGroup]="signInformGroup" class="v-box flex-center-start">
+            <ion-input
+              style="margin-bottom: 10px; border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+              placeholder="Email" [formControl]="signInEmail">
+            </ion-input>
+            <ion-input
+              style="border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+              placeholder="Password" type="password" [formControl]="signInPassword"></ion-input>
+
+            <ion-button style="margin-top: 35px; width: 100%" (click)="onSignIn()" [disabled]="this.signInformGroup.invalid">
+              Sign In
+            </ion-button>
+            <p style="font-size: 0.9rem;">Or</p>
+            <ion-button style="margin-top: 5px;  width: 100%" (click)="onFlipToSignUp()">
+              To Sign Up
+            </ion-button>
+            <!--<div style="display: flex; flex-direction: row">
+              <p style="font-size: 0.9rem">forgotten password?</p>
+            </div>-->
+          </form>
+        </div>
+      </div>
+      <div class="tp-box__side tp-box__back">
+        <div>
+          <form [formGroup]="signInformGroup" class="v-box flex-center-start">
+            <ion-input
+              style="margin-bottom: 10px; border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+              placeholder="Email" [formControl]="signUpEmail">
+            </ion-input>
+            <ion-input
+              style="margin-bottom: 10px; border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+              placeholder="Password" type="password" [formControl]="signUpPassword"></ion-input>
+            <ion-input
+              style="border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+              placeholder="Repeat Password" type="password" [formControl]="signUpRepeatPassword"></ion-input>
+
+            <ion-button style="margin-top: 35px;  width: 100%" [disabled]="this.registerFormGroup.invalid" (click)="onSignUp()">
+              Sign Up
+            </ion-button>
+            <p style="font-size: 0.9rem;">Or</p>
+            <ion-button style="margin-top: 5px; width: 100%" (click)="onFlipToSignIn()">
+              To Sign In
+            </ion-button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

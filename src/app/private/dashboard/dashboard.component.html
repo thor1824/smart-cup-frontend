@@ -2,8 +2,11 @@
   <h1 class="flex-center-center v-box" style="margin-top: 20px">Dashboard</h1>
   <div class="span-2 v-box flex-center-center">
     <ion-label>Your Cup</ion-label>
-    <div class="h-box temp-display">
+    <div *ngIf="!this.noDevice" class="h-box temp-display">
       <h4 style="margin-left: 25px;">{{shownValue$ | async}}<span>&#8451;</span></h4>
+    </div>
+    <div *ngIf="this.noDevice">
+      <p style="font-size: 0.8rem">no cup registered..</p>
     </div>
   </div>
   <div class="span-1">

@@ -1,37 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {LoginComponent} from "./login/login.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {SettingsComponent} from "./settings/settings.component";
-import {TempGraphComponent} from "./temp-graph/temp-graph.component";
-import {DeviceGuard} from "./guard/deviceGuard";
+import {LoginComponent} from "./public/login/login.component";
+import {DashboardComponent} from "./private/dashboard/dashboard.component";
+import {SettingsComponent} from "./private/settings/settings.component";
+import {TempGraphComponent} from "./private/temp-graph/temp-graph.component";
+import {DeviceGuard} from "./private/guard/deviceGuard";
 
 const routes: Routes = [
   {
-    path: 'temp-graph',
-    component: TempGraphComponent,
+    path: 'user',
+    loadChildren: () => import('./private/private.module').then(m => m.PrivateModule),
     canActivate: [DeviceGuard]
   },
   {
-    path: 'settings',
-    component: SettingsComponent,
-    canActivate: [DeviceGuard]
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [DeviceGuard]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
+    path: 'auth',
+    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
   },
   {
     path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    redirectTo: 'user'
   },
+  {
+    path: '**',
+    redirectTo: 'user'
+  }
 ];
 
 @NgModule({

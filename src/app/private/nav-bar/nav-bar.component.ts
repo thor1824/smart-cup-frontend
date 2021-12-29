@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IconService} from "../services/icon.service";
+import {IconService} from "../../services/icon.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
   navigateTo(index: NavTo) {
     this.indexPressed = index;
     const navString = this.getNavString(index);
-    this.router.navigate([navString]);
+    this.router.navigate(['user/' + navString]);
   }
 
   private getNavString(index: NavTo) {

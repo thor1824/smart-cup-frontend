@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Settings, SettingsPutBody} from "../settings/models/SettingsPutBody";
+import {Settings, SettingsPutBody} from "../private/settings/models/SettingsPutBody";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";

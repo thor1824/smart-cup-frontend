@@ -21,17 +21,17 @@ export class TempService {
 
   constructor(
     private http: HttpClient,
-    private deviceService: DeviceService,
+    /*private deviceService: DeviceService,*/
     private socket: Socket
   ) {
   }
 
 
-  getNewestTemp(): Observable<TempReading> {
+  getNewestTemp(deviceId: string): Observable<TempReading> {
     if (this.newestTempSetup) {
       return this.newestTemp$
     }
-    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).pipe(map(x => {
+    this.socket.fromEvent<TempReading>(`${deviceId}/temp-new`).pipe(map(x => {
       return {
         ...x,
         timestamp: new Date(x.timestamp)
@@ -45,13 +45,13 @@ export class TempService {
   }
 
 
-  getThisMonthTemp(): Observable<TempReading[]> {
+  getThisMonthTemp(deviceId: string): Observable<TempReading[]> {
     if (this.tempOfPeriodSetup) {
       return this.tempOfPeriod$
     }
     const end = new Date();
     const start = new Date(end.valueOf() - 2592000000); // -30 days
-    this.http.get<TempReading[]>(`${this.tempApi}/${this.deviceService.DeviceId}`, {
+    this.http.get<TempReading[]>(`${this.tempApi}/${deviceId}`, {
       params: {
         from: '' + start,
         to: '' + end
@@ -76,7 +76,7 @@ export class TempService {
       this.tempOfPeriod.next(sorted.slice(0, 10));
       this.newestTemp.next(sorted[0]);
     })
-    this.socket.fromEvent<TempReading>(`${this.deviceService.DeviceId}/temp-new`).pipe(map(x => {
+    this.socket.fromEvent<TempReading>(`${deviceId}/temp-new`).pipe(map(x => {
       return {
         ...x,
         timestamp: new Date(x.timestamp)

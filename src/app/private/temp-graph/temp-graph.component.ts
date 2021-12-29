@@ -18,8 +18,9 @@ import {
   Title,
   Tooltip
 } from "chart.js";
-import {TempService} from "../services/temp.service";
 import {takeWhile} from "rxjs/operators";
+import {TempService} from "../../services/temp.service";
+import {AuthService} from "../../services/auth.service";
 
 declare var $: any;
 
@@ -37,9 +38,11 @@ export class TempGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   bars!: any;
   colorArray: any;
   private loaded: boolean = false;
+  public noDevice: boolean = false;
 
   constructor(
-    private tempService: TempService
+    private tempService: TempService,
+    private auth: AuthService
   ) {
   }
 
@@ -104,23 +107,30 @@ export class TempGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   gettingAsyncConnection() {
-    this.tempService.getThisMonthTemp().pipe(takeWhile(() => !this.loaded)).subscribe(resp => {
-      if (!resp || resp.length <= 0) {
-        return;
-      }
-      this.loaded = true;
-      for (const tempReading of resp.reverse()) {
+    const sub = this.auth.user$.subscribe(x => {
+      if (!!x.devices && x.devices.length > 0) {
+        const dId = x.devices[0];
+        this.tempService.getThisMonthTemp(dId).pipe(takeWhile(() => !this.loaded)).subscribe(resp => {
+          if (!resp || resp.length <= 0) {
+            return;
+          }
+          this.loaded = true;
+          for (const tempReading of resp.reverse()) {
 
-        this.addDataToChart(tempReading.value, tempReading.timestamp.toDateString())
+            this.addDataToChart(tempReading.value, tempReading.timestamp.toDateString())
+          }
+        });
+
+        this.tempService.getNewestTemp(dId).subscribe(value => {
+          if (!this.loaded) {
+            return;
+          }
+          this.addDataToChart(value.value, value.timestamp.toDateString())
+        })
+      } else {
+        this.noDevice = true;
       }
     });
-
-    this.tempService.getNewestTemp().subscribe(value => {
-      if (!this.loaded) {
-        return;
-      }
-      this.addDataToChart(value.value, value.timestamp.toDateString())
-    })
   }
 
   ngOnDestroy(): void {
