@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HistoryService } from './history.service';
+import { EventFeedService } from './event-feed.service';
 
 describe('HistoryService', () => {
-  let service: HistoryService;
+  let service: EventFeedService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HistoryService);
+    service = TestBed.inject(EventFeedService);
   });
 
   it('should be created', () => {

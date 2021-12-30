@@ -1,5 +1,32 @@
-.event>.inner-event{
-  color: black !important;
-  p{color: inherit}
+.event {
+  border-left: 18px solid grey;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 60px;
+  background-color: var(--theme-color-1);
+  width: 100%;
 }
-.inner-event{}
+
+.a {
+  border-left-color: #353b95;
+}
+.b {
+  border-left-color: #be3168;
+}
+.c {
+  border-left-color: #ef5c66;
+}
+.e {
+  border-left-color: #f5d432;
+}
+.f {
+  border-left-color: #568ae0;
+}
+
+.inner-event {
+  color: var(--theme-color-5) !important;
+
+  p {
+    color: inherit
+  }
+}

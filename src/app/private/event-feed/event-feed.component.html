@@ -1,12 +1,46 @@
 <div class="v-box full" style="background-color: var(--background-primary); align-items: center">
-  <h1 class="flex-center-center v-box" style="margin-top: 20px">History</h1>
+  <h1 class="flex-center-center v-box" style="margin-top: 20px">Event Feed</h1>
 
-  <div style="display: flex; flex-direction: column; width: auto; background-color: white;">
-    <div *ngFor="let h of history" class="event" style="border-left: 10px solid grey; color: black; border-bottom: 1px solid lightgray">
-      <div [ngSwitch]="h.code" class="inner-event">
-        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: h}" >
+  <div class="v-box flex-center-start" style="margin: 30px 20px 120px 20px; overflow-y: scroll; overflow-x: hidden">
+    <div *ngFor="let event of events" class="event h-box flex-center-start" [ngClass]="event.code">
+      <div [ngSwitch]="event.code" class="inner-event" style="margin-left:10px">
+        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: event}" >
         </ng-container>
-        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: h}">
+        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'c'" [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'e'" [ngTemplateOutlet]="e" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'f'" [ngTemplateOutlet]="f" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+      </div>
+    </div>
+    <div *ngFor="let event of events" class="event h-box flex-center-start" [ngClass]="event.code">
+      <div [ngSwitch]="event.code" class="inner-event" style="margin-left:10px">
+        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: event}" >
+        </ng-container>
+        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'c'" [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'e'" [ngTemplateOutlet]="e" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'f'" [ngTemplateOutlet]="f" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+      </div>
+    </div>
+    <div *ngFor="let event of events" class="event h-box flex-center-start" [ngClass]="event.code">
+      <div [ngSwitch]="event.code" class="inner-event" style="margin-left:10px">
+        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: event}" >
+        </ng-container>
+        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'c'" [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'e'" [ngTemplateOutlet]="e" [ngTemplateOutletContext]="{ctx: event}">
+        </ng-container>
+        <ng-container *ngSwitchCase="'f'" [ngTemplateOutlet]="f" [ngTemplateOutletContext]="{ctx: event}">
         </ng-container>
       </div>
     </div>
@@ -14,11 +48,21 @@
 </div>
 
 <ng-template #a let-con="ctx">
-  <p>sip</p>
-  <p>{{con | json}}</p>
+  <p>Sip occurred! you drank 15 ml</p>
 </ng-template>
 
 <ng-template #b let-con="ctx">
-  <p>setting</p>
-  <p>{{con | json}}</p>
+  <p>New settings applied! Temperature Reading interval set to 5 sec</p>
+</ng-template>
+
+<ng-template #c let-con="ctx">
+  <p>New settings applied! Temperature low threshold set to 21.5C</p>
+</ng-template>
+
+<ng-template #e let-con="ctx">
+  <p>Cup Refill! new volume 500 ml</p>
+</ng-template>
+
+<ng-template #f let-con="ctx">
+  <p>Cup pour out! new volume 100 ml</p>
 </ng-template>
