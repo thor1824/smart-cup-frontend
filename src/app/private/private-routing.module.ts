@@ -29,7 +29,7 @@ const routes: Routes = [
         canActivate: [DeviceGuard]
       },
       {
-        path: 'history',
+        path: 'event-feed',
         component: EventFeedComponent,
         canActivate: [DeviceGuard]
       },

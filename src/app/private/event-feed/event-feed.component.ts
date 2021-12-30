@@ -18,7 +18,7 @@ export class EventFeedComponent implements OnInit {
   }
 
    GetHistory() {
-    return this.historyService.GetHistory(this.deviceService.DeviceId).subscribe(a => {
+    return this.historyService.GetHistory(this.deviceService.SelectedDeviceId).subscribe(a => {
       this.history = a;
     });
   }

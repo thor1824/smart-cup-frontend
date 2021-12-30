@@ -10,8 +10,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DeviceGuard} from "./private/guard/deviceGuard";
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {environment} from "../environments/environment";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { DeviceSwitcherComponent } from './private/device-switcher/device-switcher.component';
+import {AuthInterceptor} from "./private/interceptors/auth.interceptor";
 
 const config: SocketIoConfig = {url: environment.socketUrl, options: {}};
 
@@ -22,7 +24,7 @@ const config: SocketIoConfig = {url: environment.socketUrl, options: {}};
   imports: [
     BrowserModule,
     RouterModule,
-    HttpClientModule ,
+    HttpClientModule,
     AppRoutingModule,
     IonicModule.forRoot(
       {
@@ -37,7 +39,12 @@ const config: SocketIoConfig = {url: environment.socketUrl, options: {}};
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [DeviceGuard],
+  providers: [DeviceGuard,
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

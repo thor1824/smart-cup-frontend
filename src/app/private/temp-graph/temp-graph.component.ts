@@ -109,7 +109,7 @@ export class TempGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   gettingAsyncConnection() {
     const sub = this.auth.user$.subscribe(x => {
       if (!!x.devices && x.devices.length > 0) {
-        const dId = x.devices[0];
+        const dId = x.devices[0]._id;
         this.tempService.getThisMonthTemp(dId).pipe(takeWhile(() => !this.loaded)).subscribe(resp => {
           if (!resp || resp.length <= 0) {
             return;

@@ -9,14 +9,38 @@ body, html {
   padding: 0;
   margin: 0;
 
-  --primary-color: #bf0d0d;
-  --background-primary: #bf0d0d;
-  --text-color: #ffffff;
-  --theme-color-1: #D9D7D7;
-  --theme-color-2: #A6652D;
-  --theme-color-3: #A65A2E;
-  --theme-color-4: #593F2F;
-  --theme-color-5: #260101;
+
+  --theme-color-1: #EFC3A4;
+  --theme-color-2: #4B1f0e;
+  /*--theme-color-3: #be7656;*/
+  --theme-color-3: #975031;
+  --theme-color-4: #794028;
+  --theme-color-5: #0e0504;
+  --text-color: #FFFFFF;
+
+  --primary-color: var(--theme-color-4);
+  --background: var(--theme-color-1);
+  --ion-item-background: var(--theme-color-1);
+  --background-primary: var(--theme-color-4);
+
+}
+
+:root {
+  --ion-color-wuup: #794028;
+  --ion-color-wuup-rgb: 121,64,40;
+  --ion-color-wuup-contrast: #ffffff;
+  --ion-color-wuup-contrast-rgb: 255,255,255;
+  --ion-color-wuup-shade: #6a3823;
+  --ion-color-wuup-tint: #86533e;
+}
+
+.ion-color-wuup {
+  --ion-color-base: var(--ion-color-wuup);
+  --ion-color-base-rgb: var(--ion-color-wuup-rgb);
+  --ion-color-contrast: var(--ion-color-wuup-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-wuup-contrast-rgb);
+  --ion-color-shade: var(--ion-color-wuup-shade);
+  --ion-color-tint: var(--ion-color-wuup-tint);
 }
 
 h1, h2, h3, h4, h5, h6, p, span, ion-label, ion-text, ion-title {
@@ -24,7 +48,7 @@ h1, h2, h3, h4, h5, h6, p, span, ion-label, ion-text, ion-title {
 }
 
 ion-content {
-  background-color: var(--background-primary)
+  background-color: var(--background-primary) !important;
 }
 
 .h-box {

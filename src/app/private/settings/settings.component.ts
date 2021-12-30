@@ -26,7 +26,7 @@ export class SettingsComponent implements OnInit {
   }
 
   private SetIntervalAtStart() {
-    this.settingsService.GetSettings(this.deviceService.DeviceId).subscribe(value => {
+    this.settingsService.GetSettings(this.deviceService.SelectedDeviceId).subscribe(value => {
       console.log(value)
       this.sensorId = value.configs[0].SensorId;
       this.interval = (value.configs[0].Interval / 1000);
@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
     this.intervalString = interval + ' seconds';
 
     const setting = <SettingsPutBody>({
-      iotDeviceId: this.deviceService.DeviceId,
+      iotDeviceId: this.deviceService.SelectedDeviceId,
       sensorConfigs: [{
         SensorId: this.sensorId,
         Interval: interval * 1000,

@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, Subscription} from "rxjs";
 import {TempReading, TempService} from "../../services/temp.service";
 import {AuthService} from "../../services/auth.service";
+import {DeviceService} from "../../services/device.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,20 +16,27 @@ export class DashboardComponent implements OnInit {
   public shownValue$ = this.shownValueBehavior.asObservable();
   private currentTask = 0;
   public noDevice = false;
+  private tempSub: Subscription = new Subscription();
 
 
   constructor(
     private tempService: TempService,
-    private auth: AuthService
+    private auth: AuthService,
+    private device: DeviceService
   ) {
   }
 
   ngOnInit(): void {
-    const sub = this.auth.user$.subscribe(x => {
-      if (!!x.devices && x.devices.length > 0) {
-        const dId = x.devices[0];
-        this.tempService.getNewestTemp(dId).subscribe(x => this.handleNewTemp(x))
-        this.tempService.getThisMonthTemp(dId).subscribe()
+    const sub = this.device.selectedDeviceId$.subscribe(id => {
+      console.log(id);
+      if (!!id && id.length > 0) {
+        this.tempSub.unsubscribe();
+        this.tempSub = new Subscription();
+        const sub2 = this.tempService.getNewestTemp(id).subscribe(x => this.handleNewTemp(x))
+        this.tempSub.add(sub2)
+        const sub3 = this.tempService.getThisMonthTemp(id).subscribe()
+        this.tempSub.add(sub3)
+
       } else {
         this.noDevice = true;
       }
@@ -47,7 +55,7 @@ export class DashboardComponent implements OnInit {
     this.currentTask++;
     const thisTask = this.currentTask
     const s = parseFloat(this.shownValueBehavior.value)
-    oldValue = oldValue !== s ? s: oldValue
+    oldValue = oldValue !== s ? s : oldValue
     if (newValue > oldValue) {
       for (let i = oldValue; i < newValue; i = i + 0.1) {
         this.shownValueBehavior.next(i.toFixed(1));

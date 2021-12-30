@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-dm',
@@ -7,10 +8,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PrivateComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private auth:AuthService
+  ) {
   }
 
   ngOnInit(): void {
+    const sub = this.auth.me().subscribe()
   }
-
 }

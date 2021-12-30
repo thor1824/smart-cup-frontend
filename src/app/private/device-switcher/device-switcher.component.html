@@ -1,0 +1,54 @@
+<div
+  style="position: absolute; color: var(--text-color); padding: 10px 14px; border-radius: 50%; font-size: 1.5rem; margin: 15px; border: 2px solid #00000030"
+  class="ion-activatable"
+  (click)="openDeviceMenu()"
+>
+  <fa-icon [icon]="icon.List"></fa-icon>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>
+
+<ion-menu side="start" menuId="first" contentId="main">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="ion-text-center" style="color: var(--theme-color-5); text-align: center;">Select SmartCup
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content style="padding-bottom: 20px">
+    <ion-list>
+      <ion-item *ngFor="let device of deviceService.devices$ | async"
+                [attr.color]="deviceService.SelectedDeviceId === device._id ? 'wuup' : ''"
+                [class.selected-device]="deviceService.SelectedDeviceId === device._id"
+                (click)="this.deviceService.SelectedDeviceId = device._id" style="margin: 10px; border-radius: 5px">
+        <fa-icon [icon]="icon.Coffee" style="color: var(--theme-color-5); margin-left:10px;"></fa-icon>
+        <p style="margin-left:10px; color: var(--theme-color-5)">
+          {{device.name}}</p>
+      </ion-item>
+    </ion-list>
+    <div style="margin: 0 30px">
+      <div *ngIf="!showCreate">
+        <ion-button class="flex-center-start v-box" style="height: 40px" (click)="openAddNewCup()" color="wuup">
+          <p>Add New</p>
+        </ion-button>
+      </div>
+      <div *ngIf="showCreate">
+        <form (submit)="onAddDevice()" [formGroup]="newDeviceForm" class="flex-center-start v-box">
+          <ion-input
+            style="margin-bottom: 10px; border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+            placeholder="Name" formControlName="name">
+          </ion-input>
+          <ion-input
+            style="margin-bottom: 10px; border: #00000020 solid 1px; border-radius: 10px; box-shadow: 0 5px 15px #00000050; background-color: white"
+            placeholder="Device Code" formControlName="deviceCode">
+          </ion-input>
+          <div class="flex-center-start h-box">
+            <ion-button type="submit" style="margin-right: 10px;" color="wuup" [disabled]="this.newDeviceForm.invalid">
+              Add
+            </ion-button>
+            <ion-button color="wuup" (click)="onCancelAdd()">Cancel</ion-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-menu>

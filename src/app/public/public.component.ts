@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-dm',
+  selector: 'app-public',
   templateUrl: './public.component.html',
   styleUrls: ['./public.component.scss']
 })

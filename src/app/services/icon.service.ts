@@ -11,6 +11,7 @@ export class IconService {
   public Clock = iconLibraryRegularFree.faClock
   public Settings = iconLibrarySolidFree.faCog
   public History = iconLibrarySolidFree.faHistory
+  public List = iconLibrarySolidFree.faList
 
   constructor() { }
 }

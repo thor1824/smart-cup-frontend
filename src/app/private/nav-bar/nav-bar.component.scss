@@ -23,10 +23,10 @@
 }
 
 * {
-  --nav-backgorund: #D62404;
-  --nav-button: #D62404;
-  --nav-button-pressed: #b92304;
-  --nav-button-border: 1px solid #ED4B07AA;
+  --nav-backgorund: var(--theme-color-3);
+  --nav-button: var(--theme-color-3);
+  --nav-button-pressed: var(--theme-color-3);
+  --nav-button-border: 1px solid var(--theme-color-3);;
 }
 
 

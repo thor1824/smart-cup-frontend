@@ -28,9 +28,6 @@ export class TempService {
 
 
   getNewestTemp(deviceId: string): Observable<TempReading> {
-    if (this.newestTempSetup) {
-      return this.newestTemp$
-    }
     this.socket.fromEvent<TempReading>(`${deviceId}/temp-new`).pipe(map(x => {
       return {
         ...x,
@@ -46,9 +43,6 @@ export class TempService {
 
 
   getThisMonthTemp(deviceId: string): Observable<TempReading[]> {
-    if (this.tempOfPeriodSetup) {
-      return this.tempOfPeriod$
-    }
     const end = new Date();
     const start = new Date(end.valueOf() - 2592000000); // -30 days
     this.http.get<TempReading[]>(`${this.tempApi}/${deviceId}`, {

@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
   navigateTo(index: NavTo) {
     this.indexPressed = index;
     const navString = this.getNavString(index);
-    this.router.navigate(['user/' + navString]);
+    this.router.navigate(['user/' + navString]).then();
   }
 
   private getNavString(index: NavTo) {
@@ -33,9 +33,8 @@ export class NavBarComponent implements OnInit {
         return 'temp-graph';
       case NavTo.Settings:
         return 'settings';
-      case NavTo.History:
-        return 'history';
-
+      case NavTo.EventFeed:
+        return 'event-feed';
     }
   }
 
@@ -45,5 +44,5 @@ export enum NavTo {
   Home,
   Graph,
   Settings,
-  History
+  EventFeed
 }

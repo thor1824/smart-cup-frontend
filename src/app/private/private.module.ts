@@ -8,7 +8,11 @@ import {PrivateRoutingModule} from "./private-routing.module";
 import {IonicModule} from "@ionic/angular";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {CommonModule} from "@angular/common";
-import { EventFeedComponent } from './event-feed/event-feed.component';
+import {EventFeedComponent} from './event-feed/event-feed.component';
+import {DeviceSwitcherComponent} from "./device-switcher/device-switcher.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,13 +21,15 @@ import { EventFeedComponent } from './event-feed/event-feed.component';
     SettingsComponent,
     TempGraphComponent,
     NavBarComponent,
-    EventFeedComponent
+    EventFeedComponent,
+    DeviceSwitcherComponent
   ],
   imports: [
     PrivateRoutingModule,
     IonicModule,
     FontAwesomeModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class PrivateModule {
