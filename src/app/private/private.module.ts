@@ -8,6 +8,7 @@ import {PrivateRoutingModule} from "./private-routing.module";
 import {IonicModule} from "@ionic/angular";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {CommonModule} from "@angular/common";
+import { EventFeedComponent } from './event-feed/event-feed.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {CommonModule} from "@angular/common";
     DashboardComponent,
     SettingsComponent,
     TempGraphComponent,
-    NavBarComponent
+    NavBarComponent,
+    EventFeedComponent
   ],
   imports: [
     PrivateRoutingModule,

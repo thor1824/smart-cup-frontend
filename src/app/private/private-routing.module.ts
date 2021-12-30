@@ -6,6 +6,7 @@ import {TempGraphComponent} from "./temp-graph/temp-graph.component";
 import {DeviceGuard} from "./guard/deviceGuard";
 import {SettingsComponent} from "./settings/settings.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {EventFeedComponent} from "./event-feed/event-feed.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [DeviceGuard]
+      },
+      {
+        path: 'history',
+        component: EventFeedComponent,
         canActivate: [DeviceGuard]
       },
       {

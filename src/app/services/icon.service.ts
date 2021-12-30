@@ -10,6 +10,7 @@ export class IconService {
   public Chart = iconLibraryRegularFree.faChartBar
   public Clock = iconLibraryRegularFree.faClock
   public Settings = iconLibrarySolidFree.faCog
+  public History = iconLibrarySolidFree.faHistory
 
   constructor() { }
 }

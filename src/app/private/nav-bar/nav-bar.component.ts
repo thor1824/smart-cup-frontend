@@ -33,6 +33,8 @@ export class NavBarComponent implements OnInit {
         return 'temp-graph';
       case NavTo.Settings:
         return 'settings';
+      case NavTo.History:
+        return 'history';
 
     }
   }
@@ -42,5 +44,6 @@ export class NavBarComponent implements OnInit {
 export enum NavTo {
   Home,
   Graph,
-  Settings
+  Settings,
+  History
 }

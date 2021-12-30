@@ -1,0 +1,24 @@
+<div class="v-box full" style="background-color: var(--background-primary); align-items: center">
+  <h1 class="flex-center-center v-box" style="margin-top: 20px">History</h1>
+
+  <div style="display: flex; flex-direction: column; width: auto; background-color: white;">
+    <div *ngFor="let h of history" class="event" style="border-left: 10px solid grey; color: black; border-bottom: 1px solid lightgray">
+      <div [ngSwitch]="h.code" class="inner-event">
+        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: h}" >
+        </ng-container>
+        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: h}">
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #a let-con="ctx">
+  <p>sip</p>
+  <p>{{con | json}}</p>
+</ng-template>
+
+<ng-template #b let-con="ctx">
+  <p>setting</p>
+  <p>{{con | json}}</p>
+</ng-template>
