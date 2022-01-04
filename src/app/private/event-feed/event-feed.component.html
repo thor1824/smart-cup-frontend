@@ -16,34 +16,6 @@
         </ng-container>
       </div>
     </div>
-    <div *ngFor="let event of events" class="event h-box flex-center-start" [ngClass]="event.code">
-      <div [ngSwitch]="event.code" class="inner-event" style="margin-left:10px">
-        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: event}" >
-        </ng-container>
-        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-        <ng-container *ngSwitchCase="'c'" [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-        <ng-container *ngSwitchCase="'e'" [ngTemplateOutlet]="e" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-        <ng-container *ngSwitchCase="'f'" [ngTemplateOutlet]="f" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-      </div>
-    </div>
-    <div *ngFor="let event of events" class="event h-box flex-center-start" [ngClass]="event.code">
-      <div [ngSwitch]="event.code" class="inner-event" style="margin-left:10px">
-        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: event}" >
-        </ng-container>
-        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-        <ng-container *ngSwitchCase="'c'" [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-        <ng-container *ngSwitchCase="'e'" [ngTemplateOutlet]="e" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-        <ng-container *ngSwitchCase="'f'" [ngTemplateOutlet]="f" [ngTemplateOutletContext]="{ctx: event}">
-        </ng-container>
-      </div>
-    </div>
   </div>
 </div>
 

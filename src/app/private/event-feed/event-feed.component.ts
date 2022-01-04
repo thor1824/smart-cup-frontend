@@ -19,6 +19,7 @@ export class EventFeedComponent implements OnInit {
 
    GetHistory() {
     return this.eventFeed.GetEventFeed(this.deviceService.SelectedDeviceId).subscribe(a => {
+      console.log(a);
       this.events = a.sort((a,b) => a.timestamp.valueOf() - b.timestamp.valueOf());
     });
   }
