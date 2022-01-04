@@ -3,6 +3,7 @@ import {BehaviorSubject, Subscription} from "rxjs";
 import {TempReading, TempService} from "../../services/temp.service";
 import {AuthService} from "../../services/auth.service";
 import {DeviceService} from "../../services/device.service";
+import {EventFeedService} from "../../services/event-feed.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,11 +23,13 @@ export class DashboardComponent implements OnInit {
   constructor(
     private tempService: TempService,
     private auth: AuthService,
-    private device: DeviceService
+    private device: DeviceService,
+    private eFeed: EventFeedService
   ) {
   }
 
   ngOnInit(): void {
+
     const sub = this.device.selectedDeviceId$.subscribe(id => {
       console.log(id);
       if (!!id && id.length > 0) {

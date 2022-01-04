@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DeviceService} from "../../services/device.service";
+import {EventFeedService} from "../../services/event-feed.service";
 
 @Component({
   selector: 'app-metric-feed',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MetricFeedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private device: DeviceService,
+              private eFeed: EventFeedService) { }
 
   ngOnInit(): void {
+
+    const sub = this.device.selectedDeviceId$.subscribe(id => {
+      this.eFeed.getFilled(id).subscribe();
+      this.eFeed.getIntake(id).subscribe();
+      this.eFeed.getSpilled(id).subscribe();
+    });
+
   }
 
 }

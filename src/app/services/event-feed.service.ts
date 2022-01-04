@@ -50,15 +50,15 @@ export class EventFeedService {
     // return this.client.get<BaseEvent[]>(`${this.api}/${id}`);
   }
 
-  getFilled(deviceId: string) {
-    this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`);
+  getFilled(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`);
   }
 
-  getSpilled(deviceId: string) {
-    this.client.get(`${this.metricsApi.replace(':id', deviceId)}/spilled`);
+  getSpilled(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/spilled`);
   }
 
-  getIntake(deviceId: string) {
-    this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`);
+  getIntake(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`);
   }
 }
