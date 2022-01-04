@@ -34,7 +34,7 @@ export class DeviceService {
   set Devices(devices: Device[]) {
     if(devices.length > 0) {
       if(this.SelectedDeviceId.length === 0) {
-        this.SelectedDeviceId = devices[0]._id;
+        this.SelectedDeviceId = devices[0].deviceCode;
       }
     }
     this.devices$.next(devices);

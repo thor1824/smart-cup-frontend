@@ -49,5 +49,25 @@ export class EventFeedService {
     // return this.client.get<BaseEvent[]>(`${this.api}/${id}`);
   }
 
+<<<<<<< HEAD
 
+=======
+  getFilled(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`, {params:{
+        rng: "0"
+      }});
+  }
+
+  getSipped(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/Sipped`, {params:{
+        rng: "0"
+      }});
+  }
+
+  getIntake(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`, {params:{
+        rng: "0"
+      }});
+  }
+>>>>>>> c16aa338296cf016ac75a7c17b1f5e4e17c0cb0f
 }
