@@ -51,14 +51,20 @@ export class EventFeedService {
   }
 
   getFilled(deviceId: string): Observable<any> {
-    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`);
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`, {params:{
+        rng: "0"
+      }});
   }
 
   getSipped(deviceId: string): Observable<any> {
-    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/Sipped`);
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/Sipped`, {params:{
+        rng: "0"
+      }});
   }
 
   getIntake(deviceId: string): Observable<any> {
-    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`);
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`, {params:{
+        rng: "0"
+      }});
   }
 }
