@@ -8,10 +8,18 @@ import {EventTypeENUM, Metrics, TimePeriodENUM} from "../private/metric-feed/mod
   providedIn: 'root'
 })
 export class MetricsService {
-  api = environment.apiUrl + '/metrics'
+  metricsApi = `${environment.apiUrl}/metrics/:id`;
   constructor(private client: HttpClient) { }
 
-  public GetMetrics(deviceId: string) : Observable<Metrics> {
-    return this.client.get<Metrics>(`${this.api}/${deviceId}`);
+  getFilled(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`);
+  }
+
+  getSipped(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/Sipped`);
+  }
+
+  getIntake(deviceId: string): Observable<any> {
+    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`);
   }
 }

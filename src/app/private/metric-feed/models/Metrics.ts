@@ -1,10 +1,13 @@
 export interface Metrics {
   iot_id: string;
-  volume: number;
-  eventType: EventTypeENUM;
-  timePeriod: TimePeriodENUM;
+  timeStamp: Date;
+  eventType: string;
+  data: IEventData;
 }
 
+export interface IEventData{
+
+}
 export enum EventTypeENUM{
   EVENT_SIPPED = "sipped",
   EVENT_FILLED = "filled",

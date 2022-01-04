@@ -9,7 +9,6 @@ import {BaseEvent, SettingsChangedEvent, SipEvent} from '../private/event-feed/m
 })
 export class EventFeedService {
   api = environment.apiUrl + '/event-feed'
-  metricsApi = `${environment.apiUrl}/metrics/:id`;
 
   constructor(private client: HttpClient) {
   }
@@ -50,15 +49,5 @@ export class EventFeedService {
     // return this.client.get<BaseEvent[]>(`${this.api}/${id}`);
   }
 
-  getFilled(deviceId: string): Observable<any> {
-    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`);
-  }
 
-  getSipped(deviceId: string): Observable<any> {
-    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/Sipped`);
-  }
-
-  getIntake(deviceId: string): Observable<any> {
-    return this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`);
-  }
 }
