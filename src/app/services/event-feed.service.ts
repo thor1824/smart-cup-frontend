@@ -9,6 +9,7 @@ import {BaseEvent, SettingsChangedEvent, SipEvent} from '../private/event-feed/m
 })
 export class EventFeedService {
   api = environment.apiUrl + '/event-feed'
+  metricsApi = `${environment.apiUrl}/metrics/:id`;
 
   constructor(private client: HttpClient) {
   }
@@ -18,28 +19,28 @@ export class EventFeedService {
     const newContent: BaseEvent[] = [
       {
         id: "1",
-        timestamp: new Date(s+1),
+        timestamp: new Date(s + 1),
         sipVolume: "10",
         code: "a"
       } as SipEvent,
       {
         id: "2",
-        timestamp: new Date(s+2),
+        timestamp: new Date(s + 2),
         code: "b"
       } as SettingsChangedEvent,
       {
         id: "2",
-        timestamp: new Date(s+4),
+        timestamp: new Date(s + 4),
         code: "c"
       } as SettingsChangedEvent,
       {
         id: "2",
-        timestamp: new Date(s+5),
+        timestamp: new Date(s + 5),
         code: "e"
       } as SettingsChangedEvent,
       {
         id: "2",
-        timestamp: new Date(s+6),
+        timestamp: new Date(s + 6),
         code: "f"
       } as SettingsChangedEvent,
     ];
@@ -47,5 +48,17 @@ export class EventFeedService {
 
 
     // return this.client.get<BaseEvent[]>(`${this.api}/${id}`);
+  }
+
+  getFilled(deviceId: string) {
+    this.client.get(`${this.metricsApi.replace(':id', deviceId)}/filled`);
+  }
+
+  getSpilled(deviceId: string) {
+    this.client.get(`${this.metricsApi.replace(':id', deviceId)}/spilled`);
+  }
+
+  getIntake(deviceId: string) {
+    this.client.get(`${this.metricsApi.replace(':id', deviceId)}/intake`);
   }
 }
