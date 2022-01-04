@@ -7,6 +7,7 @@ import {DeviceGuard} from "./guard/deviceGuard";
 import {SettingsComponent} from "./settings/settings.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {EventFeedComponent} from "./event-feed/event-feed.component";
+import {MetricFeedComponent} from "../private/metric-feed/metric-feed.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         redirectTo: 'dashboard'
+      },
+      {
+        path: 'metric-feed',
+        component: MetricFeedComponent,
+        canActivate: [DeviceGuard]
       },
       {
         path: '**',

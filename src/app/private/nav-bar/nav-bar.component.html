@@ -11,4 +11,7 @@
   <div class="nav-button" [class.nav-button-pressed]="indexPressed === NavTo.EventFeed" (click)="navigateTo(NavTo.EventFeed)">
     <fa-icon [icon]="icon.History"></fa-icon>
   </div>
+  <div class="nav-button" [class.nav-button-pressed]="indexPressed === NavTo.MetricFeed" (click)="navigateTo(NavTo.MetricFeed)">
+    <fa-icon [icon]="icon.BalanceWeight"></fa-icon>
+  </div>
 </div>

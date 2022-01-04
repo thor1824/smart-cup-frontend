@@ -35,6 +35,8 @@ export class NavBarComponent implements OnInit {
         return 'settings';
       case NavTo.EventFeed:
         return 'event-feed';
+      case NavTo.MetricFeed:
+        return 'metric-feed';
     }
   }
 
@@ -44,5 +46,6 @@ export enum NavTo {
   Home,
   Graph,
   Settings,
-  EventFeed
+  EventFeed,
+  MetricFeed
 }

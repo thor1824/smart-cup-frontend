@@ -12,6 +12,7 @@ export class IconService {
   public Settings = iconLibrarySolidFree.faCog
   public History = iconLibrarySolidFree.faHistory
   public List = iconLibrarySolidFree.faList
+  public BalanceWeight = iconLibrarySolidFree.faBalanceScale
 
   constructor() { }
 }

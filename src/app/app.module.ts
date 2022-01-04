@@ -14,12 +14,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { DeviceSwitcherComponent } from './private/device-switcher/device-switcher.component';
 import {AuthInterceptor} from "./private/interceptors/auth.interceptor";
+import { MetricFeedComponent } from './private/metric-feed/metric-feed.component';
 
 const config: SocketIoConfig = {url: environment.socketUrl, options: {}};
 
 @NgModule({
   declarations: [
     AppComponent,
+    MetricFeedComponent,
   ],
   imports: [
     BrowserModule,
