@@ -13,13 +13,11 @@ export class MetricFeedComponent implements OnInit {
               private eFeed: EventFeedService) { }
 
   ngOnInit(): void {
-
     const sub = this.device.selectedDeviceId$.subscribe(id => {
       this.eFeed.getFilled(id).subscribe();
       this.eFeed.getIntake(id).subscribe();
-      this.eFeed.getSpilled(id).subscribe();
+      this.eFeed.getSipped(id).subscribe();
     });
-
   }
 
 }
