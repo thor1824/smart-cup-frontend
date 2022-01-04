@@ -12,6 +12,7 @@ export class MetricFeedComponent implements OnInit {
   constructor(private device: DeviceService,
               private eFeed: EventFeedService) { }
 
+
   ngOnInit(): void {
     const sub = this.device.selectedDeviceId$.subscribe(id => {
       this.eFeed.getFilled(id).subscribe();
