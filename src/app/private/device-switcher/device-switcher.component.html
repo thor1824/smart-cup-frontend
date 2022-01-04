@@ -17,9 +17,9 @@
   <ion-content style="padding-bottom: 20px">
     <ion-list>
       <ion-item *ngFor="let device of deviceService.devices$ | async"
-                [attr.color]="deviceService.SelectedDeviceId === device._id ? 'wuup' : ''"
-                [class.selected-device]="deviceService.SelectedDeviceId === device._id"
-                (click)="this.deviceService.SelectedDeviceId = device._id" style="margin: 10px; border-radius: 5px">
+                [attr.color]="deviceService.SelectedDeviceId === device.deviceCode ? 'wuup' : ''"
+                [class.selected-device]="deviceService.SelectedDeviceId === device.deviceCode"
+                (click)="this.deviceService.SelectedDeviceId = device.deviceCode" style="margin: 10px; border-radius: 5px">
         <fa-icon [icon]="icon.Coffee" style="color: var(--theme-color-5); margin-left:10px;"></fa-icon>
         <p style="margin-left:10px; color: var(--theme-color-5)">
           {{device.name}}</p>
