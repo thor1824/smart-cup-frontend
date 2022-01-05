@@ -2,13 +2,13 @@
   <h1 class="flex-center-center v-box" style="margin-top: 20px">Event Feed</h1>
 
   <div class="v-box flex-center-start" style="margin: 30px 20px 120px 20px; overflow-y: scroll; overflow-x: hidden">
-    <div *ngFor="let event of events" class="event h-box flex-center-start" [ngClass]="event.code">
-      <div [ngSwitch]="event.code" class="inner-event" style="margin-left:10px">
-        <ng-container *ngSwitchCase="'a'" [ngTemplateOutlet]="a" [ngTemplateOutletContext]="{ctx: event}" >
+    <div *ngFor="let event of eventFeed.events$| async" class="event h-box flex-center-start" [ngClass]="event.eventType">
+      <div [ngSwitch]="event.eventType" class="inner-event" style="margin-left:10px">
+        <ng-container *ngSwitchCase="'sipped'" [ngTemplateOutlet]="sipped" [ngTemplateOutletContext]="{ctx: event}" >
         </ng-container>
-        <ng-container *ngSwitchCase="'b'" [ngTemplateOutlet]="b" [ngTemplateOutletContext]="{ctx: event}">
+        <ng-container *ngSwitchCase="'poured'" [ngTemplateOutlet]="poured" [ngTemplateOutletContext]="{ctx: event}">
         </ng-container>
-        <ng-container *ngSwitchCase="'c'" [ngTemplateOutlet]="c" [ngTemplateOutletContext]="{ctx: event}">
+        <ng-container *ngSwitchCase="'filled'" [ngTemplateOutlet]="filled" [ngTemplateOutletContext]="{ctx: event}">
         </ng-container>
         <ng-container *ngSwitchCase="'e'" [ngTemplateOutlet]="e" [ngTemplateOutletContext]="{ctx: event}">
         </ng-container>
@@ -19,16 +19,16 @@
   </div>
 </div>
 
-<ng-template #a let-con="ctx">
-  <p>Sip occurred! you drank 15 ml</p>
+<ng-template #sipped let-con="ctx">
+  <p>Sip occurred! <br> you drank {{con.data.volumeSipped}} ml</p>
 </ng-template>
 
-<ng-template #b let-con="ctx">
-  <p>New settings applied! Temperature Reading interval set to 5 sec</p>
+<ng-template #poured let-con="ctx">
+  <p>Pour out has occured! <br>{{con.data.volumePoured}} ml has been spilled - new volume {{con.data.currentVolume}} ml</p>
 </ng-template>
 
-<ng-template #c let-con="ctx">
-  <p>New settings applied! Temperature low threshold set to 21.5C</p>
+<ng-template #filled let-con="ctx">
+  <p>Cup has been filled! <br> The volume has been increased by {{con.data.volumeFilled}} ml</p>
 </ng-template>
 
 <ng-template #e let-con="ctx">

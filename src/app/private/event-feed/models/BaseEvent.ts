@@ -1,7 +1,10 @@
+import {IEventData} from "../../metric-feed/models/Metrics";
+
 export interface BaseEvent {
-    id : string;
+    iot_id : string;
     timestamp: Date;
-    code: string
+    eventType: string;
+    data: IEventData;
   }
 
 export interface SipEvent extends BaseEvent{

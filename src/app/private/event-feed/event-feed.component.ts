@@ -9,15 +9,14 @@ import {BaseEvent} from "./models/BaseEvent";
   styleUrls: ['./event-feed.component.scss']
 })
 export class EventFeedComponent implements OnInit {
-  events: BaseEvent[] = [];
 
-  constructor(private eventFeed: EventFeedService, private deviceService: DeviceService) {}
+
+  constructor(public eventFeed: EventFeedService, private deviceService: DeviceService) {}
 
   ngOnInit(): void {
     this.deviceService.selectedDeviceId$.subscribe(id => {
       console.log(id);
       this.eventFeed.GetEventFeed(id).subscribe(a => {
-        this.events = a.sort((a,b) => a.timestamp.valueOf() - b.timestamp.valueOf());
       });
     });
   }

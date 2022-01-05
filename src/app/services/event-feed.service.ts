@@ -13,14 +13,7 @@ import {TempReading} from "./temp.service";
 export class EventFeedService {
   api = environment.apiUrl + '/event-feed'
   s = 1640868813887;
-  events$ = new BehaviorSubject<BaseEvent[]>([
-    {
-      id: "1",
-      timestamp: new Date(this.s + 1),
-      sipVolume: "10",
-      code: "a"
-    } as SipEvent
-  ]);
+  events$ = new BehaviorSubject<BaseEvent[]>([]);
 
   metricsApi = `${environment.apiUrl}/metrics/:id`;
   constructor(private socket: Socket, private client: HttpClient) {
@@ -28,13 +21,31 @@ export class EventFeedService {
   }
 
   public GetEventFeed(id: string): Observable<BaseEvent[]> {
-    this.client.get<BaseEvent[]>(`${this.metricsApi.replace(':id', id)}/all`).subscribe(evnts => {
+    this.client.get<BaseEvent[]>(`${this.metricsApi.replace(':id', id)}/all`).pipe(map(x => {
+      x.forEach(y => y.timestamp = new Date(y.timestamp))
+      return x;
+    })).subscribe(evnts => {
+      evnts = evnts.sort((a,b) =>
+        b.timestamp.valueOf() - a.timestamp.valueOf()
+      )
+      console.log(evnts);
       this.events$.next(evnts);
-      this.socket.fromEvent<BaseEvent>(`${id}/coffee-event`).subscribe(evnt =>
+      this.socket.fromEvent<BaseEvent>(`${id}/coffee-event`).pipe(map(x => {
+        return {
+          ...x,
+          timestamp: new Date(x.timestamp)
+        }
+
+      })).subscribe(evnt =>
       {
         console.log("tab",evnt);
-        const temp = this.events$.value;
+        let temp = this.events$.value;
+        console.log(temp)
         temp.push(evnt);
+        temp = temp.sort((a,b) =>
+          b.timestamp.valueOf() - a.timestamp.valueOf()
+        )
+        console.log(temp);
         this.events$.next(temp);
       });
     });
