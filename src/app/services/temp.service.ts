@@ -33,7 +33,6 @@ export class TempService {
         ...x,
         timestamp: new Date(x.timestamp)
       }
-
     })).subscribe((tempReading) => {
       this.newestTemp.next(tempReading);
     });

@@ -1,11 +1,13 @@
 export interface SettingsPutBody {
-  sensorConfigs: SensorConfig[]
   iotDeviceId: string;
+  interval: number;
+  prefMinTemp: number;
 }
 
 export interface Settings {
   iot_id: string;
-  configs: SensorConfig[]
+  interval: number;
+  prefMinTemp: number;
 }
 
 export interface SensorConfig {

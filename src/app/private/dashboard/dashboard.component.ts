@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public handleNewTemp(reading: TempReading) {
+    console.log(reading)
     const newValue = reading.value;
     const oldValue = this.temperatur;
     this.temperatur = newValue;
