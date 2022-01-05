@@ -14,13 +14,11 @@ export class EventFeedComponent implements OnInit {
   constructor(private eventFeed: EventFeedService, private deviceService: DeviceService) {}
 
   ngOnInit(): void {
-    this.GetHistory();
-  }
-
-   GetHistory() {
-    return this.eventFeed.GetEventFeed(this.deviceService.SelectedDeviceId).subscribe(a => {
-      console.log(a);
-      this.events = a.sort((a,b) => a.timestamp.valueOf() - b.timestamp.valueOf());
+    this.deviceService.selectedDeviceId$.subscribe(id => {
+      console.log(id);
+      this.eventFeed.GetEventFeed(id).subscribe(a => {
+        this.events = a.sort((a,b) => a.timestamp.valueOf() - b.timestamp.valueOf());
+      });
     });
   }
 

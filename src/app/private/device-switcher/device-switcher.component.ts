@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DeviceService} from "../../services/device.service";
 import {AuthService} from "../../services/auth.service";
 import {Subscription} from "rxjs";
+import {EventFeedService} from "../../services/event-feed.service";
 
 @Component({
   selector: 'app-device-switcher',
@@ -21,7 +22,7 @@ export class DeviceSwitcherComponent implements OnInit {
     private menu: MenuController,
     private fb: FormBuilder,
     public deviceService: DeviceService,
-    private auth: AuthService
+    private auth: AuthService,
   ) {
     this.newDeviceForm = this.fb.group({
       deviceCode: ['', [Validators.required]],
