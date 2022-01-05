@@ -1,11 +1,21 @@
 <div class="v-box full" style="background-color: var(--background-primary); align-items: center">
   <h1 class="flex-center-center v-box" style="margin-top: 20px">Metrics Feed</h1>
-  <div  class="h-box flex-center-start">
-    <p>You have drinken</p>
-    <p *ngIf="sipped">{{sipped.iot_id}}</p>
-  </div>
-  <div class="h-box flex-center-start">
-    <p>You have filled</p>
-    <p *ngIf="filled">{{filled.iot_id}}</p>
+  <div class="parent-box">
+        <div class="parent-content-box">
+          <div class="header-box">
+            <h4>Drunk</h4>
+          </div>
+          <div class="box-content">
+            <h2>{{sippedVolume}} ml</h2>
+          </div>
+        </div>
+        <div class="parent-content-box">
+          <div class="header-box">
+            <h4>Filled</h4>
+          </div>
+          <div class="box-content">
+            <h2>{{filledVolume}} ml</h2>
+          </div>
+        </div>
   </div>
 </div>

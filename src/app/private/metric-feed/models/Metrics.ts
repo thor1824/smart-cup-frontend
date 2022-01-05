@@ -6,7 +6,7 @@ export interface Metrics {
 }
 
 export interface IEventData{
-
+  volumeFilled: number;
 }
 export enum EventTypeENUM{
   EVENT_SIPPED = "sipped",

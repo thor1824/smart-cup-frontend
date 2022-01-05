@@ -1,0 +1,29 @@
+.parent-box {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.parent-content-box {
+  padding: 5px;
+  background-color: var(--background);
+  min-width: 110px;
+  border-radius: 10px;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+
+.box-content {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.box-content h2{
+  color: #0e0504;
+}
+
+.header-box h4{
+  color: #0e0504;
+}
