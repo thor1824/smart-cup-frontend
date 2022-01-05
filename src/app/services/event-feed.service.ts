@@ -14,6 +14,7 @@ export class EventFeedService {
   api = environment.apiUrl + '/event-feed'
   s = 1640868813887;
   events$ = new BehaviorSubject<BaseEvent[]>([]);
+  newestEvents$ = new BehaviorSubject<BaseEvent>(undefined as unknown as BaseEvent);
 
   metricsApi = `${environment.apiUrl}/metrics/:id`;
   constructor(private socket: Socket, private client: HttpClient) {
@@ -38,14 +39,12 @@ export class EventFeedService {
 
       })).subscribe(evnt =>
       {
-        console.log("tab",evnt);
         let temp = this.events$.value;
-        console.log(temp)
         temp.push(evnt);
         temp = temp.sort((a,b) =>
           b.timestamp.valueOf() - a.timestamp.valueOf()
         )
-        console.log(temp);
+        this.newestEvents$.next(evnt);
         this.events$.next(temp);
       });
     });

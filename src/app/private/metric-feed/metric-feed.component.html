@@ -1,21 +1,42 @@
-<div class="v-box full" style="background-color: var(--background-primary); align-items: center">
-  <h1 class="flex-center-center v-box" style="margin-top: 20px">Metrics Feed</h1>
-  <div class="parent-box">
+<div class="v-box full" style="background-color: var(--background-primary);">
+  <h1 class="flex-center-start v-box" style="margin-top: 20px">Metrics Feed</h1>
+  <div class="parent-box flex-center-start v-box">
+    <table>
+      <tr >
+        <td>
+          <div class="parent-content-box">
+            <div class="header-box">
+              <h4>Drunk</h4>
+            </div>
+            <div class="box-content">
+              <h2>{{sippedVolume}} ml</h2>
+            </div>
+            <p>Today</p>
+          </div>
+        </td>
+        <td>
+          <div class="parent-content-box">
+            <div class="header-box">
+              <h4>Filled</h4>
+            </div>
+            <div class="box-content">
+              <h2>{{filledVolume}} ml</h2>
+            </div>
+            <p>Today</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
         <div class="parent-content-box">
           <div class="header-box">
-            <h4>Drunk</h4>
+            <h4>Spilled</h4>
           </div>
           <div class="box-content">
-            <h2>{{sippedVolume}} ml</h2>
+            <h2>{{intakeVolume}} ml</h2>
           </div>
+          <p>Today</p>
         </div>
-        <div class="parent-content-box">
-          <div class="header-box">
-            <h4>Filled</h4>
-          </div>
-          <div class="box-content">
-            <h2>{{filledVolume}} ml</h2>
-          </div>
-        </div>
+      </tr>
+    </table>
   </div>
 </div>

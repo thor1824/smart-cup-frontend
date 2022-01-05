@@ -1,17 +1,16 @@
 .parent-box {
   margin-top: 20px;
   display: flex;
-  justify-content: space-around;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .parent-content-box {
   padding: 5px;
   background-color: var(--background);
-  min-width: 110px;
+  min-width: 150px;
   border-radius: 10px;
-  margin-right: 5px;
-  margin-left: 10px;
+  margin: 7px;
 }
 
 
@@ -20,10 +19,14 @@
   padding-right: 2px;
 }
 
+.parent-content-box p{
+  color: var(--theme-color-5);
+}
+
 .box-content h2{
-  color: #0e0504;
+  color: var(--theme-color-5);
 }
 
 .header-box h4{
-  color: #0e0504;
+  color: var(--theme-color-5)
 }
