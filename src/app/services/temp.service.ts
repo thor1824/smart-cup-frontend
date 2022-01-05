@@ -91,6 +91,7 @@ export interface TempReading {
   value: number;
   measurementType: MeasurementType;
   timestamp: Date;
+  tooCold: boolean;
   iot_id: string;
   sensor_id: string;
 }

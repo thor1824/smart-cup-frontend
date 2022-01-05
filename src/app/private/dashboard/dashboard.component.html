@@ -5,6 +5,7 @@
     <div *ngIf="!this.noDevice" class="h-box temp-display">
       <h4 style="margin-left: 25px;">{{shownValue$ | async}}<span>&#8451;</span></h4>
     </div>
+    <p *ngIf="this.tooCold">TOO COLD!!</p>
     <div *ngIf="this.noDevice">
       <p style="font-size: 0.8rem">no cup registered..</p>
     </div>

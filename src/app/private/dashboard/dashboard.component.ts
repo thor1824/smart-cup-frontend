@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   private currentTask = 0;
   public noDevice = false;
   private tempSub: Subscription = new Subscription();
+  public tooCold: boolean = false;
 
 
   constructor(
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
     const newValue = reading.value;
     const oldValue = this.temperatur;
     this.temperatur = newValue;
+    this.tooCold = reading.tooCold;
     this.animateTempUp(newValue, oldValue).then();
     return;
   }
