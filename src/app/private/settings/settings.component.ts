@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
     const setting = <SettingsPutBody>({
       iotDeviceId: this.deviceService.SelectedDeviceId,
       interval: interval * 1000,
-      prefMinTemp: 10
+      prefMinTemp: 20
     });
     console.log(interval);
     this.settingsService.UpdateSettings(setting).subscribe();

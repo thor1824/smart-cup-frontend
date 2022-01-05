@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
     const sub = this.device.selectedDeviceId$.subscribe(id => {
       console.log(id);
       if (!!id && id.length > 0) {
+        this.noDevice = false;
         this.tempSub.unsubscribe();
         this.tempSub = new Subscription();
         const sub2 = this.tempService.getNewestTemp(id).subscribe(x => this.handleNewTemp(x))
